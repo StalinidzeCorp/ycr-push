@@ -37,10 +37,8 @@ else
     dockerfile_context=${DOCKERFILE_CONTEXT}
 fi
 
-echo "${KEY_JSON}" > key.json
-
 # login
-cat key.json | docker login --username json_key --password-stdin cr.yandex
+echo "${KEY_JSON}" | docker login --username oauth --password-stdin cr.yandex
 
 # build
 docker build -t cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f ${DOCKERFILE_PATH} ${dockerfile_context}
